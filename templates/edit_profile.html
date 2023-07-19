@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://kit.fontawesome.com/7de5075b35.js" crossorigin="anonymous"></script>
+  <link href="{{ url_for('static', filename='images/favicon.ico') }}" rel="icon">
+  <link rel="stylesheet" href="static/css/all.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.min.css">
+
+  <title>User Dashboard</title>
+  <style>
+    /* Styles for the dashboard */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .divider {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: left;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .divider h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 20px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-name {
+      margin-right: 17px;
+      font-weight: bold;
+    }
+
+    .dropdown {
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+
+    .dropdown i {
+      margin-left: 5px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #545b62;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      right: 0;
+      top: 100%;
+      padding: 10px 0;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Rest of the styles */
+    .dashboard {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .nav {
+      width: 200px;
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      box-sizing: border-box;
+      position: fixed;
+      top: 100px;
+      bottom: 0;
+    }
+
+    .nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav li {
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav a:hover {
+      color: #ff0;
+    }
+
+    .nav a::before {
+      margin-right: 10px;
+    }
+
+    
+    .nav a.dashboard-icon::before {
+      content: "\f015";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.upload-icon::before {
+      content: "\f093";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.contact-icon::before {
+      content: "\f095";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.faq-icon::before {
+      content: "\f059";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.help-icon::before {
+      content: "\f128";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.user-profile::before {
+      content: "\f007";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.sign-out-icon::before {
+      content: "\f2f5";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      box-sizing: border-box;
+      margin-left: 200px;
+    }
+
+    .user-profile {
+      display: none;
+    }
+
+    /* Style for the background image */
+    body:before {
+      content: "";
+      position: fixed;
+      top: 69px;
+      left: 200px;
+      width: 80%;
+      height: 88%;
+      z-index: -1;
+      background-image: url(static/images/userdashboard.png);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.7;
+    }
+
+    /* Media queries */
+    @media screen and (max-width: 768px) {
+      .nav {
+        width: 100%;
+        position: static;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="divider">
+    <h1>CLEAN FRAME</h1>
+    <div class="header">
+      <div class="profile">
+        <span class="profile-name"><strong>Welcome, {{ current_user.first_name }}</strong></span>
+        <div class="dropdown">
+          <a href="#" class="user-profile"><i class="fas fa-user"></i></a>
+          <div class="dropdown-content">
+            <a href="{{ url_for('edit_profile') }}" class="btn btn-primary">Edit Profile</a>
+            <a href="{{ url_for('forgot_password') }}">Change Password</a>
+            <a href="{{ url_for('logout') }}">Sign Out</a>  
+          </div>
+          <i class="fas fa-angle-down"></i> <!-- Arrow symbol -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard">
+    <div class="nav">
+      <ul>
+        <li><a href="{{url_for('dashboard')}}" class="dashboard-icon">Dashboard</a></li>
+        <li><a href="{{ url_for('profile') }}" class="user-profile-icon"><i class="fas fa-user"></i>User Profile</a></li>
+        <li class="dropdown">
+          <a href="#" class="upload-icon">Upload</a>
+          <div class="dropdown-content">
+            <a href="{{ url_for('upload') }}">Upload Model That Takes All Pixels</a>
+            <a href="#">Upload Option 2</a>
+            <a href="#">Upload Option 3</a>
+          </div>
+        </li>
+        <li><a href="#" class="contact-icon">Contact</a></li>
+        <li><a href="#" class="faq-icon">FAQ</a></li>
+        <li><a href="#" class="help-icon">Help</a></li>
+      </ul>
+    </div>
+    <div class="content">
+        <div id="userProfile">
+            <div class="profile-info">
+              <h2>Edit Profile</h2>
+              <form action="{{ url_for('edit_profile') }}" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="{{ current_user.username }}"><br><br>
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" value="{{ current_user.first_name }}"><br><br>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" value="{{ current_user.last_name }}"><br><br>
+                
+                <input type="submit" value="Update Profile" class="btn btn-primary">
+              </form>
+            </div>
+          </div>
+          
+        <div class="profile-actions">
+          <a href="{{ url_for('profile') }}" class="btn btn-primary">Check Profile</a>
+          <a href="{{ url_for('forgot_password') }}" class="btn btn-primary">Change Password</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const userProfileButton = document.querySelector(".user-profile-icon");
+    const userProfile = document.getElementById("userProfile");
+
+    userProfileButton.addEventListener("click", () => {
+      userProfile.style.display = "block";
+    });
+
+    const flashMessage = document.getElementById("flash-message");
+    if (flashMessage) {
+      flashMessage.style.display = "block";
+      setTimeout(() => {
+        flashMessage.style.display = "none";
+      }, 5000);  // Flash message will be displayed for 5 seconds (5000 milliseconds)
+    }
+    
+  </script>
+
+
+</body>
+</html>

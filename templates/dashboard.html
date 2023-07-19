@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://kit.fontawesome.com/7de5075b35.js" crossorigin="anonymous"></script>
+  <link href="{{ url_for('static', filename='images/favicon.ico') }}" rel="icon">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="static/css/all.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+
+  <title>User Dashboard</title>
+  <style>
+    /* Styles for the dashboard */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .divider {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: left;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .divider h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 20px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-name {
+      margin-right: 17px;
+      font-weight: bold;
+    }
+
+    .dropdown {
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+
+    .dropdown i {
+      margin-left: 5px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #545b62;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      right: 0;
+      top: 100%;
+      padding: 10px 0;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown-content.content2{
+        display: none;
+      position: relative;
+      background-color: #545b62;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      right: 0;
+      top: 100%;
+      padding: 10px 0;
+    }
+    /* Rest of the styles */
+    .dashboard {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .nav {
+      width: 200px;
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      box-sizing: border-box;
+      position: fixed;
+      top: 100px;
+      bottom: 0;
+    }
+
+    .nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav li {
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav a:hover {
+      color: #ff0;
+    }
+
+    .nav a::before {
+      margin-right: 10px;
+    }
+
+    
+    .nav a.dashboard-icon::before {
+      content: "\f015";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.upload-icon::before {
+      content: "\f093";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.contact-icon::before {
+      content: "\f095";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.faq-icon::before {
+      content: "\f059";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.help-icon::before {
+      content: "\f128";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.user-profile::before {
+      content: "\f007";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.sign-out-icon::before {
+      content: "\f2f5";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+    .nav a.dashboard-icon::before {
+      content: "\f015";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.upload-icon::before {
+      content: "\f093";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.contact-icon::before {
+      content: "\f095";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.faq-icon::before {
+      content: "\f059";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.help-icon::before {
+      content: "\f128";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.user-profile::before {
+      content: "\f007";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .nav a.sign-out-icon::before {
+      content: "\f2f5";
+      font-family: "FontAwesome"; /* Modified font-family name */
+      font-weight: 900;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      box-sizing: border-box;
+      margin-left: 200px;
+    }
+
+    .user-profile {
+      display: none;
+    }
+
+    /* Style for the background image */
+    body:before {
+      content: "";
+      position: fixed;
+      top: 69px;
+      left: 200px;
+      width: 80%;
+      height: 88%;
+      z-index: -1;
+      background-image: url(static/images/userdashboard.png);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.7;
+    }
+
+    /* Media queries */
+    @media screen and (max-width: 768px) {
+      .nav {
+        width: 100%;
+        position: static;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+    }
+
+    .contact {
+      padding: 0px;
+      overflow: hidden;
+      height: 880px;
+      margin-top: 900px;
+      margin-left:230px
+  }
+  #footer .footer-top {
+    padding: 60px 0px 30px 30px;
+    background: #fff;
+    margin-left: 200px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="divider">
+    <h1>CLEAN FRAME</h1>
+    <div class="header">
+      <div class="profile">
+        <span class="profile-name"><strong>Welcome, {{ current_user.first_name }}</strong></span>
+        <div class="dropdown">
+          <a href="#" class="user-profile"><i class="fas fa-user"></i></a>
+          <div class="dropdown-content">
+            <a href="{{ url_for('edit_profile') }}" class="">Edit Profile</a>
+            <a href="{{ url_for('forgot_password') }}">Change Password</a>
+            <a href="{{ url_for('logout') }}">Sign Out</a>  
+          </div>
+          <i class="fas fa-angle-down"></i> <!-- Arrow symbol -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard">
+    <div class="nav">
+      <ul>
+        <li><a href="#" class="dashboard-icon"><strong>Dashboard</strong></a></li>
+        <li><a href="{{ url_for('profile') }}" class="user-profile-icon"><i class="fas fa-user"></i>User Profile</a></li>
+        <li class="dropdown">
+          <a href="#" class="upload-icon">Upload</a>
+          <div class="dropdown-content content2" >
+            <a href="{{ url_for('upload') }}">Upload Image (HandCrafted features)</a>
+            <a href="{{ url_for('upload2') }}">Upload Image (LBP)</a>
+            <a href="{{ url_for('upload3') }}">Upload Image (CNN) </a>
+          </div>
+        </li>
+        <li><a href="#contact" class="contact-icon">Contact</a></li>
+        <li><a href="faq.html" class="faq-icon">FAQ</a></li>
+        <li><a href="#" class="help-icon">Help</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <h2>Welcome to User Dashboard</h2>
+      <!-- Rest of the content for the dashboard goes here -->
+    </div>
+  </div>
+
+  <section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+  
+      <div class="section-title">
+        <h2>Contact Us</h2>
+        <p></p>
+      </div>
+  
+      <div class="row">
+  
+        <div class="col-lg-6">
+          <div class="info">
+            <div class="address">
+              <i class="bi bi-geo-alt"></i>
+              <h4>Location:</h4>
+              <p>0000 Johar Town, Lahore, 0000</p>
+            </div>
+  
+            <div class="email">
+              <i class="bi bi-envelope"></i>
+              <h4>Email:</h4>
+              <p>somaf@gmail.com</p>
+            </div>
+  
+            <div class="phone">
+              <i class="bi bi-phone"></i>
+              <h4>Call:</h4>
+              <p>+92 31100027784</p>
+            </div>
+          </div>
+          
+          <div class="map-responsive">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.8412112837996!2d74.2416731!3d31.390941599999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919018a8ea548c1%3A0x4a52db69c2c814f!2sThe%20University%20of%20Lahore!5e0!3m2!1sen!2s!4v1683233907150!5m2!1sen!2s" 
+              width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+  
+        <div class="col-lg-6">
+          <div class="Section11">
+            <form action="#" method="post" role="form" class="js-email-form">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="name">Your Name</label>
+                  <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Your Email</label>
+                  <input type="email" class="form-control" name="email" id="email" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Subject</label>
+                <input type="text" class="form-control" name="subject" id="subject" required>
+              </div>
+              <div class="form-group">
+                <label for="name">Message</label>
+                <textarea class="form-control" name="message" rows="10" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit" class="btn btn-primary">Send Message</button></div>
+            </form>
+          </div>
+        </div>
+  
+      </div>
+  
+    </div>
+  </section>
+  <!-- End Contact Section -->
+  
+    </main>
+  
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <h3>Clean Frame</h3>
+              <p>
+                Johar town  <br>
+                G1 Market<br>
+                Lahore, Pakistan <br><br>
+                <strong>Phone:</strong> +92 3110002991<br>
+                <strong>Email:</strong> cleanframe@gmail.com<br>
+              </p>
+            </div>
+            <div class="col-md-2">
+              <h4>Useful Links</h4>
+              <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Terms of service</a></li>
+                <li><a href="#">Privacy policy</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2">
+              <h4>Our Services</h4>
+              <ul>
+                <li><a href="#">Image analysis and classification</a></li>
+                <li><a href="#">User-friendly interface</a></li>
+                <li><a href="#">Industry expertise</a></li>
+                <li><a href="#">Web Development</a></li>
+                <li><a href="#">Graphic Design</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <h4>Our Social Networks</h4>
+              <div class="social-links mt-3">
+                <a href="https://twitter.com" class="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com" class="facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com" class="instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com" class="linkedin"><i class="fab fa-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid footer-bottom">
+        <div class="container">
+          <div class="text-center">
+            <p>Clean Frame <strong>&copy; 2023. All Rights Reserved</strong></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const userProfileButton = document.querySelector(".user-profile-icon");
+    const userProfile = document.getElementById("userProfile");
+
+    userProfileButton.addEventListener("click", () => {
+      userProfile.style.display = "block";
+    });
+
+    const flashMessage = document.getElementById("flash-message");
+    if (flashMessage) {
+      flashMessage.style.display = "block";
+      setTimeout(() => {
+        flashMessage.style.display = "none";
+      }, 5000);  // Flash message will be displayed for 5 seconds (5000 milliseconds)
+    }
+  </script>
+</body>
+</html>
+

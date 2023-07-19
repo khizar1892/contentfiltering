@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Clean Frame</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+
+  <link href="{{ url_for('static', filename='images/favicon.ico') }}" rel="icon">
+
+  
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+ 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+  
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+  
+      <h1 class="logo me-auto"><a href="index.html">Clean Frame</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="path/to/logo.png" alt="Clean Frame"></a> -->
+  
+      <nav id="navbar" class="navbar">
+        <ul class="nav">
+          <li class="nav-item"><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li class="nav-item"><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link scrollto" href={{url_for('login')}}>Login</a></li>
+          <li class="nav-item"><a class="nav-link scrollto" href={{url_for('register')}}>Sign up</a></li>
+          <li class="nav-item"><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          
+          {% if current_user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link logout-link" href="{{ url_for('logout') }}">Logout</a></li>
+          {% else %}
+          
+          <li class="nav-item"><a class="nav-link getstarted scrollto" href="#pricing">Get Started</a></li>
+          {% endif %}
+        </ul>
+  
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+  
+    </div>
+  </header>
+  <!-- End Header -->
+
+ 
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="Section 1" data-aos="fade-up" data-aos-delay="200">
+          <h1>Better Solutions For Your Business</h1>
+          <h2>Streamline your content filtering process with our cutting-edge technology.</h2>
+          
+        </div>
+        <div class="Section 2" data-aos="zoom-in" data-aos-delay="200">
+          <img src="/img/hero-img.png" class="img-fluid animated" alt="">    
+          <div class="Section 3" img src="img/why-us.png" data-aos="zoom-in" data-aos-delay="150">&nbsp;</div>
+        </div>    <!--image commented-->
+        </div>
+      </div>
+   
+
+  </section>
+
+  <main id="main">
+
+
+
+    
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Services</h2>
+          <p>By utilizing our services, you can leverage the power of image analysis, enhance your workflow, and confidently address your organization's specific needs.</p>
+        </div>
+    
+        <div class="row">
+          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="">Image Analysis and Classification</a></h4>
+              <p>The website uses advanced computer vision algorithms and machine learning models to analyze uploaded images and identify adult or sensitive content.</p>
+            </div>
+          </div>
+    
+          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4><a href="">User-friendly Interface</a></h4>
+              <p>The website provides a user-friendly and intuitive interface for uploading images and viewing the analysis results.</p>
+            </div>
+          </div>
+    
+          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4><a href="">Data Security and Privacy</a></h4>
+              <p>The website takes measures to ensure the security and privacy of uploaded images and user data, such as encryption, secure storage, or user authentication.</p>
+            </div>
+          </div>
+    
+          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="400">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-layer"></i></div>
+              <h4><a href="">Scalability</a></h4>
+              <p>The website is designed to handle large volumes of image uploads and analysis requests, allowing it to scale to meet the needs of businesses and organizations of all sizes.</p>
+            </div>
+          </div>
+          
+          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="500">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4><a href="">Industry Expertise</a></h4>
+              <p>The website's team includes experts in computer vision, machine learning, and data security, who bring a wealth of knowledge and experience to the development and delivery of the website's services.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+   
+
+    <section id="pricing" class="pricing">
+      <div class="container" data-aos="fade-up">
+    
+        <div class="section-title">
+          <h2>Pricing</h2>
+          <p>Pricing description</p>
+        </div>
+    
+        <div class="row">
+          <!-- Pricing plan 1 -->
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="box">
+              <h3>Free Plan</h3>
+              <h4><sup>$</sup>0<span>per month</span></h4>
+              <ul>
+                <!-- Features of the plan -->
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+                <li >Feature 4</li>
+                <li >Feature 5</li>
+              </ul>
+              <a href="#pricing" class="btn btn-primary buy-btn">Get Started</a>
+            </div>
+          </div>
+    
+          <!-- Pricing plan 2 -->
+          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
+            <div class="box featured">
+              <h3>Business Plan</h3>
+              <h4><sup>$</sup>30<span>per month</span></h4>
+              <ul>
+                <!-- Features of the plan -->
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+                <li>Feature 4</li>
+                <li>Feature 5</li>
+              </ul>
+              <a href="#pricing" class="btn btn-primary buy-btn">Get Started</a>
+            </div>
+          </div>
+    
+          <!-- Pricing plan 3 -->
+          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
+            <div class="box">
+              <h3>Developer Plan</h3>
+              <h4><sup>$</sup>50<span>per month</span></h4>
+              <ul>
+                <!-- Features of the plan -->
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+              </ul>
+              <a href="#pricing" class="btn btn-primary buy-btn">Get Started</a>
+            </div>
+          </div>
+    
+        </div>
+    
+      </div>
+    </section>
+    
+
+
+
+<section id="contact" class="contact">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Contact Us</h2>
+      <p></p>
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-6">
+        <div class="info">
+          <div class="address">
+            <i class="bi bi-geo-alt"></i>
+            <h4>Location:</h4>
+            <p>0000 Johar Town, Lahore, 0000</p>
+          </div>
+
+          <div class="email">
+            <i class="bi bi-envelope"></i>
+            <h4>Email:</h4>
+            <p>somaf@gmail.com</p>
+          </div>
+
+          <div class="phone">
+            <i class="bi bi-phone"></i>
+            <h4>Call:</h4>
+            <p>+92 31100027784</p>
+          </div>
+        </div>
+        
+        <div class="map-responsive">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.8412112837996!2d74.2416731!3d31.390941599999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919018a8ea548c1%3A0x4a52db69c2c814f!2sThe%20University%20of%20Lahore!5e0!3m2!1sen!2s!4v1683233907150!5m2!1sen!2s" 
+            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="Section11">
+          <form action="#" method="post" role="form" class="js-email-form">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="name">Your Name</label>
+                <input type="text" name="name" class="form-control" id="name" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="name">Your Email</label>
+                <input type="email" class="form-control" name="email" id="email" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">Subject</label>
+              <input type="text" class="form-control" name="subject" id="subject" required>
+            </div>
+            <div class="form-group">
+              <label for="name">Message</label>
+              <textarea class="form-control" name="message" rows="10" required></textarea>
+            </div>
+            <div class="my-3">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>
+            <div class="text-center"><button type="submit" class="btn btn-primary">Send Message</button></div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- End Contact Section -->
+
+  </main>
+
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Clean Frame</h3>
+            <p>
+              Johar town  <br>
+              G1 Market<br>
+              Lahore, Pakistan <br><br>
+              <strong>Phone:</strong> +92 3110002991<br>
+              <strong>Email:</strong> cleanframe@gmail.com<br>
+            </p>
+          </div>
+          <div class="col-md-2">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2">
+            <h4>Our Services</h4>
+            <ul>
+              <li><a href="#">Image analysis and classification</a></li>
+              <li><a href="#">User-friendly interface</a></li>
+              <li><a href="#">Industry expertise</a></li>
+              <li><a href="#">Web Development</a></li>
+              <li><a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h4>Our Social Networks</h4>
+            <div class="social-links mt-3">
+              <a href="https://twitter.com" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="https://www.facebook.com" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="https://www.instagram.com" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="https://www.linkedin.com" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid footer-bottom">
+      <div class="container">
+        <div class="text-center">
+          <p>Clean Frame <strong>&copy; 2023. All Rights Reserved</strong></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!----<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
+
+
+
+</body>
+
+</html>
