@@ -38,7 +38,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///E:/flask/database.db'
 app.config['SECRET_KEY'] = 'thisisasecretkey'
 
 # Load the machine learning model
-model = load('model.pkl')
+model = load('lbp_model.p')
 
 UPLOAD_FOLDER = 'static/uploads/'
 app.secret_key = "secretkey"
@@ -453,7 +453,7 @@ def dashboard():
 
 #CNN Model Implementation
 
-new_model = load_model('adult_non_adultclassifier.h5')
+
 
 @app.route('/upload3')
 def upload3():
