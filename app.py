@@ -1,6 +1,5 @@
 from flask import Flask, render_template, url_for, redirect, flash, get_flashed_messages
 from flask_sqlalchemy import SQLAlchemy
-
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
@@ -25,8 +24,6 @@ import cv2
 import pandas as pd
 import numpy as np
 from flask import send_from_directory
-from tensorflow.keras.models import load_model
-import tensorflow as tf
 from sqlalchemy import inspect
 
 
@@ -459,49 +456,7 @@ def upload3():
     return render_template('upload3.html')
 
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/upload3', methods=['POST'])
-def upload_image3():
-    if 'file' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
-    file = request.files['file']
-    if file.filename == '':
-        flash('No image selected for uploading')
-        return redirect(request.url)
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(filename))
-        file.save(filepath)
-        prediction, yhat = predict_adult3(filepath)
-        flash('Image successfully uploaded and displayed below')
-        return render_template('upload3.html', filename=filename, prediction=prediction, yhat=yhat)
-    else:
-        flash('Invalid input - Allowed image types are png, jpg, jpeg')
-        return redirect(request.url)
-
-from skimage.io import imread
-from skimage.transform import resize
-import numpy as np
-def predict_adult3(image_path):
-    img = imread(image_path)
-    img_resize = resize(img, (256, 256))  # Resize the image to (256, 256)
-    yhat = new_model.predict(np.expand_dims(img_resize, axis=0))
-
-    if yhat > 0.5:
-        prediction = 'Uploaded image is a Non-Adult Image'
-    else:
-        prediction = 'Uploaded image is an Adult Image'
-
-    return prediction, yhat
-
-
-
-@app.route('/display/<filename>')
-def display_image3(filename):
-    return redirect(url_for('static', filename='uploads/' + filename))
 
 
 @app.route('/schema')
