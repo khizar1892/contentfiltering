@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, redirect, flash, get_flashed_messages
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
@@ -28,7 +28,6 @@ from flask import send_from_directory
 from tensorflow.keras.models import load_model
 import tensorflow as tf
 from sqlalchemy import inspect
-import json
 
 
 
@@ -47,7 +46,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
